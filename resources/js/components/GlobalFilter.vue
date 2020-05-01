@@ -64,6 +64,10 @@ export default {
       type: Object
     }
   }),
+  mounted() {
+      this.$parent.$el.classList.remove("w-5/6");
+      this.$parent.$el.classList.add("w-full");
+  },
   methods: {
     handleChange(filter, event) {
       let value = event;

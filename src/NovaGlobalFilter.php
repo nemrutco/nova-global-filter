@@ -12,7 +12,7 @@ class NovaGlobalFilter extends Card
      * @var string
      */
     protected $filters;
-    public $width = 'full';
+    public $width = '5/6';
 
     /**
      * Get the component name for the element.
