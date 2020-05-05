@@ -1,8 +1,8 @@
 # Nova Global Filter
 
-This package allows you to broadcast any of your existing Laravel Nova filters to Metrics or custom cards.
+This package allows you to broadcast any of your existing Laravel Nova filters to metrics or custom cards.
 
-![screenshot](https://user-images.githubusercontent.com/5906125/80741990-3075f180-8b4d-11ea-8b39-c7bd03d9d7b5.png)
+![screenshot](resources/gifs/nova-global-filter.gif)
 
 ## Installation
 
@@ -14,65 +14,74 @@ composer require nemrutco/nova-global-filter
 
 ## Usage
 
-In this example, we are registering few `Metric Cards` and the `Global Filter` as:
-
-```php
-public function cards(Request $request)
-{
-	return [
-		new NewUsers // Value Metric
-
-		new UsersPerDay, // Trend Metric
-
-		new UsersPerPlan, // Partition Metric
-
-		new \Nemrutco\NovaGlobalFilter([
-			new UserType, // Select Filter
-
-			new BirthdayFilter, // Date Filter
-
-			new UserGender // Booloean Filter
-		]),
-	];
-}
-```
-
-And now on `Metric Card` or any other cards `filters` are available in `$request`:
+In this example, we are registering few `Metric Cards` and the `Global Filter` with a `Date` filter as:
 
 ```php
 ...
+use Nemrutco\NovaGlobalFilter;
+use App\Nova\Filters\Date;
+
+class Store extends Resource
+{
+  ...
+  public function cards(Request $request)
+  {
+    return [
+      new TotalSales // Value Metric
+
+      new Orders, // Trend Metric
+
+      new MostSoldProduct, // Partition Metric
+
+      // NovaGlobalFilter
+      new NovaGlobalFilter([
+        new Date, // Date Filter
+      ]),
+    ];
+  }
+  ...
+}
+```
+
+And now your `metric cards` or any `other cards` optimized to listen `GlobalFilter` can be filtered by using `GlobalFilterable` trait and calling `$this->globalFiltered($model,$filters)` method.
+
+`globalFiltered($model, $filters = [])` method expect `$model` and `$filters` parameters:
+
+```php
+use Nemrutco\NovaGlobalFilter\GlobalFilterable;
+use App\Nova\Filters\Date;
+...
+
 class UsersPerDay extends Trend
 {
-	public function calculate(NovaRequest $request)
-	{
-		// Get the model query before applying filters
-		$model = User::query();
+use GlobalFilterable;
 
-		// Check if there is any filters in the request
-		if($request->has('filters')){
-			// Apply each filter to the $model
-			foreach(json_decode($request->filters,true) as $filter => $value) {
-				$model = (new $filter)->apply($request,$model,$value);
-			}
-		}
+  public function calculate(NovaRequest $request)
+  {
+    // Filter your model with existing filters
+    $model = $this->globalFiltered(Store::class,[
+      Date::class // DateFilter
+    ]);
 
-		// Do your thing with the filtered $model
-		return $this->countByDays($request, $model);
-	}
-	...
+    // Do your thing with the filtered $model
+    return $this->countByDays($request, $model);
+
+  }
+...
 }
 
 ```
+And that's it. Your model will be filtered based on passed filter value.
 
 if you want to listen to `Global Filter` on any of `Custom Cards`:
 
 ```js
 ...
 created() {
-    Nova.$on("global-filter-changed", filter => {
-      // Do your thing with the changed filter
-      console.log(filter);
-    });
+  Nova.$on("global-filter-changed", filter => {
+    // Do your thing with the changed filter
+    console.log(filter);
+  });
 },
 ...
 ```
