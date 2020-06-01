@@ -110,13 +110,45 @@ new NovaGlobalFilter([
 ```
 
 To listen `Global Filter` on any `Custom Card`s:
-
 ```js
 ...
 created() {
   Nova.$on("global-filter-changed", filter => {
     // Do your thing with the changed filter
     console.log(filter);
+  });
+},
+...
+```
+
+To request all filter states from `Global Filter` on any `Custom Card`s:
+```js
+...
+created() {
+  Nova.$on("global-filter-request");
+},
+...
+```
+
+To request spesific filters state from `Global Filter` on any `Custom Card`s:
+```js
+...
+created() {
+  Nova.$on("global-filter-request", [
+      "App\\Nova\\Filters\\DateFilter",
+      "App\\Nova\\Filters\\CountryFilter"
+  ]);
+},
+...
+```
+
+To receive filters state from `Global Filter` on any `Custom Card`s:
+```js
+...
+created() {
+  Nova.$on("global-filter-response", filters => {
+    // Do your thing with the filters
+    console.log(filters);
   });
 },
 ...
@@ -132,8 +164,7 @@ created() {
 
 Cheers
 
-## Credits
-
+- [Nemrut Creative Studio]('https://nemrut.co)
 - [Muzaffer Dede](https://github.com/muzafferdede)
 - [All Contributors](../../contributors)
 

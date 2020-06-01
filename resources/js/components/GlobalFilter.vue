@@ -84,6 +84,18 @@ export default {
     this.$parent.$el.classList.remove("w-5/6");
     this.$parent.$el.classList.add("w-full");
   },
+  created() {
+    Nova.$on("global-filter-request", filterClasses => {
+      let filters = this.card.filters !== undefined ? this.card.filters : [];
+
+      if (filterClasses && filterClasses.length) {
+        filters = filters.filter(filter =>
+          filterClasses.includes(filter.class)
+        );
+      }
+      Nova.$emit("global-filter-response", filters);
+    });
+  },
   methods: {
     handleChange(filter, event) {
       let value = event;
@@ -103,8 +115,8 @@ export default {
       filter.currentValue = value;
       Nova.$emit("global-filter-changed", filter);
     },
-    resetFilters(filters) {
-      Nova.$emit("global-filter-reset", filters);
+    resetFilters() {
+      this.$router.go(this.$router.currentRoute);
     }
   }
 };
