@@ -12,6 +12,9 @@ export default {
             }
             this.fetch();
         });
+        Nova.$on("global-filter-reset", filters => {
+            this.$router.go(this.$router.currentRoute)
+        });
     },
 
     methods: {
