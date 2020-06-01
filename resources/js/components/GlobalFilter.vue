@@ -1,6 +1,6 @@
 <template>
   <div class="h-auto">
-    <div class="mb-4 flex justify-end items-center" v-if="card.resetable">
+    <div class="mb-4 flex justify-end items-center" v-if="card.resettable">
       <button
         class="btn btn-default btn-primary"
         @click="resetFilters(card.filters)"
