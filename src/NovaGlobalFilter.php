@@ -15,7 +15,7 @@ class NovaGlobalFilter extends Card
 
     public $inline = false;
 
-    public $resetable = false;
+    public $resettable = false;
 
     public $width = '5/6';
 
@@ -30,7 +30,8 @@ class NovaGlobalFilter extends Card
     }
 
 
-    public function __construct($filters = []) {
+    public function __construct($filters = [])
+    {
         $this->filters = $filters;
     }
 
@@ -41,17 +42,19 @@ class NovaGlobalFilter extends Card
                 return $filter->jsonSerialize();
             })->values()->all(),
             'inline' => $this->inline,
-            'resetable' => $this->resetable,
+            'resettable' => $this->resettable,
         ]);
     }
 
-    public function inline() {
+    public function inline()
+    {
         $this->inline = true;
         return $this;
     }
 
-    public function resetable() {
-        $this->resetable = true;
+    public function resettable()
+    {
+        $this->resettable = true;
         return $this;
     }
 }

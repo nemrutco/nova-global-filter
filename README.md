@@ -92,7 +92,7 @@ To enable `Reset` button
 ...
 new NovaGlobalFilter([
     // Filters
-])->resetable(),
+])->resettable(),
 ...
 ```
 
@@ -101,7 +101,7 @@ To add multiple `Global Filter`s
 ...
 new NovaGlobalFilter([
     // Filters
-])->inline()->resetable(),
+])->inline()->resettable(),
 
 new NovaGlobalFilter([
     // Filters
@@ -128,7 +128,9 @@ created() {
 - This package overwrites Nova's default `Metric Card`s to allow them to listen `"global-filter-changed"` event. Make sure there are no any conflicts with other pacages.
 - This package currently does not support Index view filters to be synchronized. So filters in `Global Filter` will not trigger update at the filters in `Filter Menu` of your Index view.
 - `Reset` button simply reloads the current page. There is nothing fancy going on behind the scenes.
-- If you are willing to support this package, it will be great to get your issues, PRs and thoughts on [Github](https://github.com/nemrutco/).
+- If you are willing to support this package, it will be great to get your issues, PRs and thoughts on [Github](https://github.com/nemrutco/). And dont forget to `Star` the package.
+
+Cheers
 
 ## Credits
 
