@@ -124,7 +124,9 @@ created() {
 To request all filter states from `Global Filter` on any `Custom Card`s:
 ```js
 ...
-  Nova.$emit("global-filter-request");
+created() {
+  Nova.$on("global-filter-request");
+},
 ...
 ```
 
@@ -162,7 +164,6 @@ created() {
 
 Cheers
 
-Made with ❤️ for open source
 - [Nemrut Creative Studio]('https://nemrut.co)
 - [Muzaffer Dede](https://github.com/muzafferdede)
 - [All Contributors](../../contributors)
