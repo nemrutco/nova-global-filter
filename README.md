@@ -132,7 +132,7 @@ To request spesific filters state from `Global Filter` on any `Custom Card`s:
 ```js
 ...
 created() {
-  Nova.$on("global-filter-request", [
+  Nova.$emit("global-filter-request", [
       "App\\Nova\\Filters\\DateFilter",
       "App\\Nova\\Filters\\CountryFilter"
   ]);
