@@ -6,7 +6,7 @@
         @click="resetFilters(card.filters)"
       >{{ __('Reset') }}</button>
     </div>
-    <div v-if="card.filters.length > 0" class="bg-30 border-b border-60 rounded-lg shadow">
+    <div v-if="card.filters.length > 0" class="bg-30 border-b border-60 rounded-lg shadow h-auto">
       <scroll-wrap class="flex flex-wrap">
         <div
           v-for="(filter,index) in card.filters"
@@ -50,6 +50,7 @@
               @change="handleChange(filter, $event)"
               class="w-full form-control form-select"
             >
+              <option value selected>&mdash;</option>
               <option
                 v-for="option in filter.options"
                 :key="option.value"
@@ -72,24 +73,24 @@ export default {
   props: {
     card: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     selectedCheckboxs: {
-      type: Object
-    }
+      type: Object,
+    },
   }),
   mounted() {
     this.$parent.$el.classList.remove("w-5/6");
     this.$parent.$el.classList.add("w-full");
   },
   created() {
-    Nova.$on("global-filter-request", filterClasses => {
+    Nova.$on("global-filter-request", (filterClasses) => {
       let filters = this.card.filters !== undefined ? this.card.filters : [];
 
       if (filterClasses && filterClasses.length) {
-        filters = filters.filter(filter =>
+        filters = filters.filter((filter) =>
           filterClasses.includes(filter.class)
         );
       }
@@ -117,7 +118,7 @@ export default {
     },
     resetFilters() {
       this.$router.go(this.$router.currentRoute);
-    }
-  }
+    },
+  },
 };
 </script>
