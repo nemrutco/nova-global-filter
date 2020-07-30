@@ -35,6 +35,7 @@
             @change="handleChange(filter, $event)"
             class="w-full form-control form-select"
           >
+            <option value selected>&mdash;</option>
             <option
               v-for="option in filter.options"
               :key="option.value"
@@ -56,17 +57,17 @@ export default {
   props: {
     card: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data: () => ({
     selectedCheckboxs: {
-      type: Object
-    }
+      type: Object,
+    },
   }),
   mounted() {
-      this.$parent.$el.classList.remove("w-5/6");
-      this.$parent.$el.classList.add("w-full");
+    this.$parent.$el.classList.remove("w-5/6");
+    this.$parent.$el.classList.add("w-full");
   },
   methods: {
     handleChange(filter, event) {
@@ -86,7 +87,7 @@ export default {
 
       filter.currentValue = value;
       Nova.$emit("global-filter-changed", filter);
-    }
-  }
+    },
+  },
 };
 </script>
