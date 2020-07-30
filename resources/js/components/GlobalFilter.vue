@@ -1,5 +1,5 @@
 <template>
-  <div v-if="card.filters.length > 0" class="bg-30 border-b border-60 rounded-lg shadow">
+  <div v-if="card.filters.length > 0" class="bg-30 border-b border-60 rounded-lg shadow h-auto">
     <scroll-wrap class="flex flex-wrap">
       <div v-for="(filter,index) in card.filters" class="w-1/3" :key="index">
         <div class="px-8 py-6">
