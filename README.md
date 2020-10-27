@@ -18,7 +18,7 @@ In this example, we are registering few `Metric Cards` and the `Global Filter` w
 
 ```php
 ...
-use Nemrutco\NovaGlobalFilter;
+use Nemrutco\NovaGlobalFilter\NovaGlobalFilter;
 use App\Nova\Filters\Date;
 
 class Store extends Resource
