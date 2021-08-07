@@ -73,6 +73,19 @@ use GlobalFilterable;
 
 And that's it. Cards will be filtered based on passed filter value.
 
+
+If you want to apply default value on initial request make sure you set default value in your filter as
+
+```php
+...
+// set default date
+public function default()
+{
+    return Carbon::now();
+}
+...
+```
+
 To change layout from `grid` to `inline`
 
 *by default it's set to `grid`*

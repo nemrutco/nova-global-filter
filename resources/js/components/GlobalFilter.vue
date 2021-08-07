@@ -50,12 +50,12 @@
               @change="handleChange(filter, $event)"
               class="w-full form-control form-select"
             >
-              <option value selected>&mdash;</option>
+              <option value selected v-if="!filter.currentValue && filter.currentValue !== 0">&mdash;</option>
               <option
                 v-for="option in filter.options"
                 :key="option.value"
                 :value="option.value"
-                :selected="option.value == filter.value"
+                :selected="option.value === filter.value || option.value === filter.currentValue"
               >{{ option.name }}</option>
             </select>
           </div>

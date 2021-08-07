@@ -1,5 +1,5 @@
 <script>
-import ValueMetric from "../../../../../vendor/laravel/nova/resources/js/components/Metrics/ValueMetric";
+import ValueMetric from "../../../vendor/laravel/nova/resources/js/components/Metrics/ValueMetric.vue";
 import FilterBehavior from "./FilterBehavior";
 import { Minimum } from "laravel-nova";
 
