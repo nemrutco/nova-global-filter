@@ -26,11 +26,12 @@
               name="date-filter"
               autocomplete="off"
               :value="filter.value"
-              dateFormat="Y-m-d"
+              alt-format="Y-m-d"
+              date-format="Y-m-d"
               :placeholder="__('Choose date')"
               :enable-time="false"
               :enable-seconds="false"
-              @input.prevent
+              @input.prevent=""
               @change="handleChange(filter, $event)"
             />
             <div v-if="filter.component === 'boolean-filter'" class="flex flex-wrap">
@@ -113,8 +114,10 @@ export default {
         value = this.selectedCheckboxs;
       }
 
-      filter.currentValue = value;
-      Nova.$emit("global-filter-changed", filter);
+      if(filter.currentValue !== value) {
+        filter.currentValue = value;
+        Nova.$emit("global-filter-changed", filter);
+      }
     },
     resetFilters() {
       this.$router.go(this.$router.currentRoute);
