@@ -25,7 +25,7 @@
               dusk="date-filter"
               name="date-filter"
               autocomplete="off"
-              :value="filter.value"
+              :value="filter.value || filter.currentValue"
               alt-format="Y-m-d"
               date-format="Y-m-d"
               :placeholder="__('Choose date')"
