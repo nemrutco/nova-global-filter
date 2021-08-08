@@ -4,12 +4,15 @@ export default {
             type: Array
         }
     }),
+
     created() {
         Nova.$on("global-filter-changed", filter => {
             this.selectedFilters[filter.class] = filter.currentValue;
+
             if (filter.currentValue === '' || JSON.stringify(filter.currentValue) === JSON.stringify({})) {
                 delete this.selectedFilters[filter.class]
             }
+            
             this.fetch();
         });
     },
