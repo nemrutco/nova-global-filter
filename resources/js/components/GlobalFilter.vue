@@ -51,7 +51,7 @@
               @change="handleChange(filter, $event)"
               class="w-full form-control form-select"
             >
-              <option value selected v-if="!filter.currentValue && filter.currentValue !== 0">&mdash;</option>
+              <option value selected="!filter.currentValue && filter.currentValue !== 0">&mdash;</option>
               <option
                 v-for="option in filter.options"
                 :key="option.value"
