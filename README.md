@@ -59,7 +59,7 @@ use GlobalFilterable;
   public function calculate(NovaRequest $request)
   {
     // Filter your model with existing filters
-    $model = $this->globalFiltered(Store::class,[
+    $model = $this->globalFiltered($request, Store::class,[
       Date::class // DateFilter
     ]);
 

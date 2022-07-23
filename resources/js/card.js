@@ -1,6 +1,6 @@
 Nova.booting((Vue, router, store) => {
-    Vue.component('partition-metric', require('./components/PartitionMetric'))
-    Vue.component('trend-metric', require('./components/TrendMetric'))
-    Vue.component('value-metric', require('./components/ValueMetric'))
-    Vue.component('nova-global-filter', require('./components/GlobalFilter'))
+     Vue.component('PartitionMetric', require('./components/PartitionMetric').default)
+     Vue.component('TrendMetric', require('./components/TrendMetric.vue').default)
+     Vue.component('ValueMetric', require('./components/ValueMetric.vue').default)
+     Vue.component('NovaGlobalFilter', require('./components/GlobalFilter.vue').default)
 })
