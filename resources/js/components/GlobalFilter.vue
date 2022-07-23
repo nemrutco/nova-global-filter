@@ -58,7 +58,7 @@
               :id="filter.name"
               v-if="filter.component === 'select-filter'"
               @change="handleChange(filter, $event)"
-              class="w-full form-control form-select"
+              class="w-full form-control form-select form-input-bordered"
             >
               <option
                 value
