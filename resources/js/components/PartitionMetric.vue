@@ -1,7 +1,7 @@
 <script>
 import Partitionmetric from "@/components/Metrics/PartitionMetric";
 import FilterBehavior from "./FilterBehavior";
-import { Minimum } from "laravel-nova";
+import  {minimum}  from "@/util";
 
 export default {
   extends: Partitionmetric,
@@ -10,7 +10,7 @@ export default {
     fetch() {
       this.loading = true;
 
-      Minimum(
+      minimum(
         Nova.request().get(this.metricEndpoint, this.filterPayload())
       ).then(
         ({

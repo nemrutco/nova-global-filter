@@ -1,10 +1,10 @@
 <template>
   <div class="h-auto">
     <div class="mb-4 flex justify-end items-center" v-if="card.resettable">
-      <button
+      <!-- <button
         class="btn btn-default btn-primary"
         @click="resetFilters(card.filters)"
-      >{{ __('Reset') }}</button>
+      >{{ __('Reset') }}</button> -->
     </div>
     <div v-if="card.filters.length > 0" class="bg-30 border-b border-60 rounded-lg shadow h-auto">
       <scroll-wrap class="flex flex-wrap">
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { Filterable, InteractsWithQueryString } from "laravel-nova";
+import { Filterable, InteractsWithQueryString } from "@/mixins";
 
 export default {
   mixins: [Filterable, InteractsWithQueryString],
@@ -99,6 +99,7 @@ export default {
     });
   },
   methods: {
+    
     handleChange(filter, event) {
       let value = event;
       if (typeof event === "object") {
@@ -119,9 +120,9 @@ export default {
         Nova.$emit("global-filter-changed", filter);
       }
     },
-    resetFilters() {
-      this.$router.go(this.$router.currentRoute);
-    },
+    // resetFilters() {
+    //   this.$router.go(this.$router.currentRoute);
+    // },
   },
 };
 </script>
