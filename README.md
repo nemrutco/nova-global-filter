@@ -109,6 +109,7 @@ To enable `Reset` button
 ...
 ```
 
+
 To add multiple `Global Filter`s
 ```php
 ...
@@ -119,6 +120,15 @@ To add multiple `Global Filter`s
 (new NovaGlobalFilter([
     // Filters
 ]))->onlyOnDetail(),
+...
+```
+
+To set `Title` of Global Filter
+```php
+...
+(new NovaGlobalFilter([
+    // Filters
+]))->title('Example Title'),
 ...
 ```
 

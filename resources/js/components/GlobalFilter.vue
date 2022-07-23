@@ -1,16 +1,28 @@
 <template>
-  <div class="h-auto md:col-span-12">
-    <div class="mb-4 flex justify-end items-center" v-if="card.resettable">
-      <button
-        class="bg-blue-500 hover:bg-blue-700 text-white py-1 px-4 text-base rounded bg-90 text-center cursor-pointer shadow-md max-w-full ml-auto"
-        @click="resetFilters(card.filters)"
-      >{{ __('Reset') }}</button>
+  <div v-if="card.filters.length > 0" class="h-auto md:col-span-12">
+    <div class="mb-4 flex" v-if="card.resettable">
+      <h1
+        class="text-90 font-normal text-xl md:text-2xl mb-3 items-center mt-6" 
+      >
+        <span>{{ card.title }}</span>
+      </h1>
+      <div class="justify-end items-center ml-auto mr-0 self-end">
+        <button
+          class="shadow rounded focus:outline-none ring-primary-200 dark:ring-gray-600 focus:ring bg-primary-500 hover:bg-primary-400 active:bg-primary-600 text-white dark:text-gray-800 inline-flex items-center font-bold px-4 h-9 text-sm flex-shrink-0"
+          @click="resetFilters(card.filters)"
+        >
+          {{ __("Reset") }}
+        </button>
+      </div>
     </div>
     <div
       v-if="card.filters.length > 0"
       class="bg-30 border-b border-60 rounded-lg shadow h-auto"
     >
-      <scroll-wrap class="flex-wrap bg-white" :class="{ 'flex w-auto': card.inline, 'w-1/3': !card.inline }">
+      <scroll-wrap
+        class="flex-wrap bg-white"
+        :class="{ 'flex w-auto': card.inline, 'w-1/3': !card.inline }"
+      >
         <div
           v-for="(filter, index) in card.filters"
           class="w-auto"
@@ -35,7 +47,7 @@
               @input.prevent=""
               @change="handleChange(filter, $event)"
             />
-      
+
             <div
               v-if="filter.component === 'boolean-filter'"
               class="flex flex-wrap"
