@@ -102,10 +102,6 @@ export default {
       type: Object,
     },
   }),
-  mounted() {
-    //this.$parent.$el.classList.remove("w-5/6");
-    //this.$parent.$el.classList.add("w-full");
-  },
   created() {
     Nova.$on("global-filter-request", (filterClasses) => {
       let filters = this.card.filters !== undefined ? this.card.filters : [];

@@ -94,31 +94,31 @@ To change layout from `grid` to `inline`
 
 ```php
 ...
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->inline(),
+]))->inline(),
 ...
 ```
 
 To enable `Reset` button
 ```php
 ...
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->resettable(),
+]))->resettable(),
 ...
 ```
 
 To add multiple `Global Filter`s
 ```php
 ...
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->inline()->resettable(),
+]))->inline()->resettable(),
 
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->onlyOnDetail(),
+]))->onlyOnDetail(),
 ...
 ```
 
