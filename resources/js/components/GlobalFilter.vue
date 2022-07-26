@@ -148,6 +148,11 @@ export default {
       }
     },
     resetFilters(filters) {
+      filters = filters.map(function(filter) {
+        filter.currentValue = null;
+        return filter;
+
+      });
        Nova.$emit("global-filter-reset", filters);
     },
   },
