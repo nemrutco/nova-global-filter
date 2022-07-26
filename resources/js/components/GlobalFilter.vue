@@ -147,8 +147,8 @@ export default {
         Nova.$emit("global-filter-changed", filter);
       }
     },
-    resetFilters() {
-      window.location.reload();
+    resetFilters(filters) {
+       Nova.$emit("global-filter-reset", filters);
     },
   },
 };
