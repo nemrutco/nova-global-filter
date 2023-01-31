@@ -6,32 +6,46 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait GlobalFilterable
 {
-    public function globalFiltered($model, $filters = [])
-    {
-        $request = request();
+  public function globalFiltered($model, $filters = [])
+  {
+    $request = request();
 
-        $model = $model instanceof Builder ? $model : (new $model)->newQuery();
+    $model = $model instanceof Builder ? $model : (new $model)->newQuery();
 
-        if ($request->has('filters')) {
+    // manage filters changed on UI
+    if ($request->has('filters')) {
 
-            $request->range = optional($request)->range ?? 3600;
+      $request->range = optional($request)->range ?? 3600;
 
-            foreach (json_decode($request->filters, true) as $filter => $value) {
-                if (empty($value) || !in_array($filter, $filters)) {
-                    continue;
-                }
+      $requestFilters = array_keys(json_decode($request->filters, true));
 
-                $model = (new $filter)->apply($request, $model, $value);
-            }
-        }else {
-            foreach ($filters as $filter) {
-                $currentFilter = new $filter;
-                
-                if(!empty($currentFilter->default())) {
-                    $model = $currentFilter->apply($request, $model, $currentFilter->default());
-                }
-            }
+      foreach (json_decode($request->filters, true) as $filter => $value) {
+        if (empty($value) || !in_array($filter, $filters)) {
+          continue;
         }
-        return $model;
+
+        $model = (new $filter)->apply($request, $model, $value);
+      }
+
+      // need to apply default filters if they are not changed on UI
+      foreach ($filters as $filter) {
+        $currentFilter = new $filter;
+
+        if (!empty($currentFilter->default()) && !in_array(get_class($currentFilter), $requestFilters)) {
+          $model = $currentFilter->apply($request, $model, $currentFilter->default());
+        }
+      }
+
+    } // manage default filter values (no filter changed on UI still)
+    else {
+      foreach ($filters as $filter) {
+        $currentFilter = new $filter;
+
+        if (!empty($currentFilter->default())) {
+          $model = $currentFilter->apply($request, $model, $currentFilter->default());
+        }
+      }
     }
+    return $model;
+  }
 }
