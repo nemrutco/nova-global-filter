@@ -59,7 +59,7 @@ use GlobalFilterable;
   public function calculate(NovaRequest $request)
   {
     // Filter your model with existing filters
-    $model = $this->globalFiltered(Store::class,[
+    $model = $this->globalFiltered($request, Store::class,[
       Date::class // DateFilter
     ]);
 
@@ -94,31 +94,41 @@ To change layout from `grid` to `inline`
 
 ```php
 ...
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->inline(),
+]))->inline(),
 ...
 ```
 
 To enable `Reset` button
 ```php
 ...
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->resettable(),
+]))->resettable(),
 ...
 ```
+
 
 To add multiple `Global Filter`s
 ```php
 ...
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->inline()->resettable(),
+]))->inline()->resettable(),
 
-new NovaGlobalFilter([
+(new NovaGlobalFilter([
     // Filters
-])->onlyOnDetail(),
+]))->onlyOnDetail(),
+...
+```
+
+To set `Title` of Global Filter
+```php
+...
+(new NovaGlobalFilter([
+    // Filters
+]))->title('Example Title'),
 ...
 ```
 

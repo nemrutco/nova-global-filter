@@ -17,6 +17,16 @@ export default {
         });
     },
 
+    mounted() {
+        let that = this;
+        Nova.$on("global-filter-reset", (filters) => {
+            filters = filters.forEach(function(filter) {
+                that.selectedFilters[filter.class] = null;
+            });
+            this.fetch();
+        });
+    },
+
     methods: {
         filterPayload() {
             const payload = {

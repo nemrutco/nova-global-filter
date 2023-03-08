@@ -17,6 +17,8 @@ class NovaGlobalFilter extends Card
 
     public $resettable = false;
 
+    public $title = '';
+
     public $width = '5/6';
 
     /**
@@ -35,7 +37,7 @@ class NovaGlobalFilter extends Card
         $this->filters = $filters;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize() :array
     {
         return array_merge(parent::jsonSerialize(), [
             'filters' => collect($this->filters ?? [])->map(function ($filter) {
@@ -43,6 +45,7 @@ class NovaGlobalFilter extends Card
             })->values()->all(),
             'inline' => $this->inline,
             'resettable' => $this->resettable,
+            'title' => $this->title,
         ]);
     }
 
@@ -55,6 +58,12 @@ class NovaGlobalFilter extends Card
     public function resettable()
     {
         $this->resettable = true;
+        return $this;
+    }
+
+    public function title($title)
+    {
+        $this->title = $title;
         return $this;
     }
 }

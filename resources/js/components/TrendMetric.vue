@@ -1,7 +1,7 @@
 <script>
 import TrendMetric from "@/components/Metrics/TrendMetric";
 import FilterBehavior from "./FilterBehavior";
-import { Minimum } from "laravel-nova";
+import  {minimum}  from "@/util";
 
 export default {
   extends: TrendMetric,
@@ -10,7 +10,7 @@ export default {
     fetch() {
       this.loading = true;
 
-      Minimum(
+      minimum(
         Nova.request().get(this.metricEndpoint, this.filterPayload())
       ).then(
         ({

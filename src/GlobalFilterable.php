@@ -6,22 +6,23 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait GlobalFilterable
 {
-    public function globalFiltered($model, $filters = [])
+    public function globalFiltered($request, $model, $filters = [])
     {
-        $request = request();
 
         $model = $model instanceof Builder ? $model : (new $model)->newQuery();
 
         if ($request->has('filters')) {
 
+            //dd(json_decode($request->filters, true));
             $request->range = optional($request)->range ?? 3600;
 
             foreach (json_decode($request->filters, true) as $filter => $value) {
-                if (empty($value) || !in_array($filter, $filters)) {
+                if (empty($value)) {
                     continue;
                 }
 
                 $model = (new $filter)->apply($request, $model, $value);
+
             }
         }else {
             foreach ($filters as $filter) {
